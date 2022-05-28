@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b3a714533f404e3b834fe5121122c1b3" Name="Diagram1">
+        <EntityTypeShape EntityType="EntregaModel.tbl_direccion" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EntregaModel.tbl_envio" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EntregaModel.tbl_paquete" Width="1.5" PointX="6" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="EntregaModel.tbl_persona" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EntregaModel.tbl_recibe" Width="1.5" PointX="6" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EntregaModel.tbl_solicitudEntrega" Width="1.5" PointX="8.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EntregaModel.tbl_tipoPersona" Width="1.5" PointX="3.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EntregaModel.tbl_usuario" Width="1.5" PointX="6" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="EntregaModel.FK__tbl_envio__Direc__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="EntregaModel.FK__tbl_solic__Direc__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="EntregaModel.FK__tbl_envio__Perso__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="EntregaModel.FK__tbl_solic__Ubica__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="EntregaModel.FK__tbl_solic__Tipo___38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="EntregaModel.FK__tbl_solic__Perso__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="EntregaModel.FK__tbl_usuar__Perso__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="EntregaModel.FK__tbl_solic__Perso__37A5467C" ManuallyRouted="false" />
+        <AssociationConnector Association="EntregaModel.FK__tbl_usuar__Tipo___32E0915F" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

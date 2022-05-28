@@ -1,0 +1,631 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EntregaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_direccion">
+          <Key>
+            <PropertyRef Name="Id_Direccion" />
+          </Key>
+          <Property Name="Id_Direccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="No_Casa" Type="int" />
+          <Property Name="Calle" Type="varchar" MaxLength="90" Nullable="false" />
+          <Property Name="Avenida" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Colonia" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="Municipio" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="Departamento" Type="varchar" MaxLength="90" Nullable="false" />
+          <Property Name="Pais" Type="varchar" MaxLength="90" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_envio">
+          <Key>
+            <PropertyRef Name="Id_Envio" />
+          </Key>
+          <Property Name="Id_Envio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Persona" Type="int" Nullable="false" />
+          <Property Name="Direccion" Type="int" Nullable="false" />
+          <Property Name="municipio" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="departamento" Type="varchar" MaxLength="80" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_paquete">
+          <Key>
+            <PropertyRef Name="Id_Paquete" />
+          </Key>
+          <Property Name="Id_Paquete" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tipo_Paquete" Type="varchar" MaxLength="90" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="90" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_persona">
+          <Key>
+            <PropertyRef Name="Id_Persona" />
+          </Key>
+          <Property Name="Id_Persona" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Apellido" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Telefono" Type="int" Nullable="false" />
+          <Property Name="Correo" Type="varchar" MaxLength="90" Nullable="false" />
+          <Property Name="DPI" Type="int" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="Tipo_Persona" Type="varchar" MaxLength="80" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_recibe">
+          <Key>
+            <PropertyRef Name="Id_Recibe" />
+          </Key>
+          <Property Name="Id_Recibe" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="90" Nullable="false" />
+          <Property Name="Apellido" Type="varchar" MaxLength="90" Nullable="false" />
+          <Property Name="Telefono" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_solicitudEntrega">
+          <Key>
+            <PropertyRef Name="Id_Entrega" />
+          </Key>
+          <Property Name="Id_Entrega" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Persona_Envio" Type="int" Nullable="false" />
+          <Property Name="Tipo_Paquete" Type="int" Nullable="false" />
+          <Property Name="Descripcion_Paquete" Type="varchar" MaxLength="90" Nullable="false" />
+          <Property Name="Peso_Paquete" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Persona_Recibe" Type="int" Nullable="false" />
+          <Property Name="Direccion_Entrega" Type="int" Nullable="false" />
+          <Property Name="Ubicacion_Entrega" Type="int" Nullable="false" />
+          <Property Name="Pago" Type="decimal" Precision="9" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_tipoPersona">
+          <Key>
+            <PropertyRef Name="Id_Tpersona" />
+          </Key>
+          <Property Name="Id_Tpersona" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tipo_Persona" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_usuario">
+          <Key>
+            <PropertyRef Name="Id_Usuario" />
+          </Key>
+          <Property Name="Id_Usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tipo_Persona" Type="int" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="90" Nullable="false" />
+          <Property Name="Contrasena" Type="varchar" MaxLength="90" Nullable="false" />
+          <Property Name="Persona" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tbl_envio__Direc__2F10007B">
+          <End Role="tbl_direccion" Type="Self.tbl_direccion" Multiplicity="1" />
+          <End Role="tbl_envio" Type="Self.tbl_envio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_direccion">
+              <PropertyRef Name="Id_Direccion" />
+            </Principal>
+            <Dependent Role="tbl_envio">
+              <PropertyRef Name="Direccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_envio__Perso__2E1BDC42">
+          <End Role="tbl_persona" Type="Self.tbl_persona" Multiplicity="1" />
+          <End Role="tbl_envio" Type="Self.tbl_envio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_persona">
+              <PropertyRef Name="Id_Persona" />
+            </Principal>
+            <Dependent Role="tbl_envio">
+              <PropertyRef Name="Persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_solic__Direc__35BCFE0A">
+          <End Role="tbl_direccion" Type="Self.tbl_direccion" Multiplicity="1" />
+          <End Role="tbl_solicitudEntrega" Type="Self.tbl_solicitudEntrega" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_direccion">
+              <PropertyRef Name="Id_Direccion" />
+            </Principal>
+            <Dependent Role="tbl_solicitudEntrega">
+              <PropertyRef Name="Direccion_Entrega" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_solic__Perso__36B12243">
+          <End Role="tbl_persona" Type="Self.tbl_persona" Multiplicity="1" />
+          <End Role="tbl_solicitudEntrega" Type="Self.tbl_solicitudEntrega" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_persona">
+              <PropertyRef Name="Id_Persona" />
+            </Principal>
+            <Dependent Role="tbl_solicitudEntrega">
+              <PropertyRef Name="Persona_Envio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_solic__Perso__37A5467C">
+          <End Role="tbl_recibe" Type="Self.tbl_recibe" Multiplicity="1" />
+          <End Role="tbl_solicitudEntrega" Type="Self.tbl_solicitudEntrega" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_recibe">
+              <PropertyRef Name="Id_Recibe" />
+            </Principal>
+            <Dependent Role="tbl_solicitudEntrega">
+              <PropertyRef Name="Persona_Recibe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_solic__Tipo___38996AB5">
+          <End Role="tbl_paquete" Type="Self.tbl_paquete" Multiplicity="1" />
+          <End Role="tbl_solicitudEntrega" Type="Self.tbl_solicitudEntrega" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_paquete">
+              <PropertyRef Name="Id_Paquete" />
+            </Principal>
+            <Dependent Role="tbl_solicitudEntrega">
+              <PropertyRef Name="Tipo_Paquete" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_solic__Ubica__398D8EEE">
+          <End Role="tbl_envio" Type="Self.tbl_envio" Multiplicity="1" />
+          <End Role="tbl_solicitudEntrega" Type="Self.tbl_solicitudEntrega" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_envio">
+              <PropertyRef Name="Id_Envio" />
+            </Principal>
+            <Dependent Role="tbl_solicitudEntrega">
+              <PropertyRef Name="Ubicacion_Entrega" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_usuar__Perso__31EC6D26">
+          <End Role="tbl_persona" Type="Self.tbl_persona" Multiplicity="1" />
+          <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_persona">
+              <PropertyRef Name="Id_Persona" />
+            </Principal>
+            <Dependent Role="tbl_usuario">
+              <PropertyRef Name="Persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_usuar__Tipo___32E0915F">
+          <End Role="tbl_tipoPersona" Type="Self.tbl_tipoPersona" Multiplicity="1" />
+          <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_tipoPersona">
+              <PropertyRef Name="Id_Tpersona" />
+            </Principal>
+            <Dependent Role="tbl_usuario">
+              <PropertyRef Name="Tipo_Persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EntregaModelStoreContainer">
+          <EntitySet Name="tbl_direccion" EntityType="Self.tbl_direccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_envio" EntityType="Self.tbl_envio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_paquete" EntityType="Self.tbl_paquete" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_persona" EntityType="Self.tbl_persona" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_recibe" EntityType="Self.tbl_recibe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_solicitudEntrega" EntityType="Self.tbl_solicitudEntrega" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_tipoPersona" EntityType="Self.tbl_tipoPersona" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_usuario" EntityType="Self.tbl_usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tbl_envio__Direc__2F10007B" Association="Self.FK__tbl_envio__Direc__2F10007B">
+            <End Role="tbl_direccion" EntitySet="tbl_direccion" />
+            <End Role="tbl_envio" EntitySet="tbl_envio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_envio__Perso__2E1BDC42" Association="Self.FK__tbl_envio__Perso__2E1BDC42">
+            <End Role="tbl_persona" EntitySet="tbl_persona" />
+            <End Role="tbl_envio" EntitySet="tbl_envio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_solic__Direc__35BCFE0A" Association="Self.FK__tbl_solic__Direc__35BCFE0A">
+            <End Role="tbl_direccion" EntitySet="tbl_direccion" />
+            <End Role="tbl_solicitudEntrega" EntitySet="tbl_solicitudEntrega" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_solic__Perso__36B12243" Association="Self.FK__tbl_solic__Perso__36B12243">
+            <End Role="tbl_persona" EntitySet="tbl_persona" />
+            <End Role="tbl_solicitudEntrega" EntitySet="tbl_solicitudEntrega" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_solic__Perso__37A5467C" Association="Self.FK__tbl_solic__Perso__37A5467C">
+            <End Role="tbl_recibe" EntitySet="tbl_recibe" />
+            <End Role="tbl_solicitudEntrega" EntitySet="tbl_solicitudEntrega" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_solic__Tipo___38996AB5" Association="Self.FK__tbl_solic__Tipo___38996AB5">
+            <End Role="tbl_paquete" EntitySet="tbl_paquete" />
+            <End Role="tbl_solicitudEntrega" EntitySet="tbl_solicitudEntrega" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_solic__Ubica__398D8EEE" Association="Self.FK__tbl_solic__Ubica__398D8EEE">
+            <End Role="tbl_envio" EntitySet="tbl_envio" />
+            <End Role="tbl_solicitudEntrega" EntitySet="tbl_solicitudEntrega" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_usuar__Perso__31EC6D26" Association="Self.FK__tbl_usuar__Perso__31EC6D26">
+            <End Role="tbl_persona" EntitySet="tbl_persona" />
+            <End Role="tbl_usuario" EntitySet="tbl_usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_usuar__Tipo___32E0915F" Association="Self.FK__tbl_usuar__Tipo___32E0915F">
+            <End Role="tbl_tipoPersona" EntitySet="tbl_tipoPersona" />
+            <End Role="tbl_usuario" EntitySet="tbl_usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EntregaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_direccion">
+          <Key>
+            <PropertyRef Name="Id_Direccion" />
+          </Key>
+          <Property Name="Id_Direccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="No_Casa" Type="Int32" />
+          <Property Name="Calle" Type="String" MaxLength="90" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Avenida" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Colonia" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Municipio" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Departamento" Type="String" MaxLength="90" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Pais" Type="String" MaxLength="90" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbl_envio" Relationship="Self.FK__tbl_envio__Direc__2F10007B" FromRole="tbl_direccion" ToRole="tbl_envio" />
+          <NavigationProperty Name="tbl_solicitudEntrega" Relationship="Self.FK__tbl_solic__Direc__35BCFE0A" FromRole="tbl_direccion" ToRole="tbl_solicitudEntrega" />
+        </EntityType>
+        <EntityType Name="tbl_envio">
+          <Key>
+            <PropertyRef Name="Id_Envio" />
+          </Key>
+          <Property Name="Id_Envio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Persona" Type="Int32" Nullable="false" />
+          <Property Name="Direccion" Type="Int32" Nullable="false" />
+          <Property Name="municipio" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="departamento" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbl_direccion" Relationship="Self.FK__tbl_envio__Direc__2F10007B" FromRole="tbl_envio" ToRole="tbl_direccion" />
+          <NavigationProperty Name="tbl_persona" Relationship="Self.FK__tbl_envio__Perso__2E1BDC42" FromRole="tbl_envio" ToRole="tbl_persona" />
+          <NavigationProperty Name="tbl_solicitudEntrega" Relationship="Self.FK__tbl_solic__Ubica__398D8EEE" FromRole="tbl_envio" ToRole="tbl_solicitudEntrega" />
+        </EntityType>
+        <EntityType Name="tbl_paquete">
+          <Key>
+            <PropertyRef Name="Id_Paquete" />
+          </Key>
+          <Property Name="Id_Paquete" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tipo_Paquete" Type="String" MaxLength="90" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="90" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbl_solicitudEntrega" Relationship="Self.FK__tbl_solic__Tipo___38996AB5" FromRole="tbl_paquete" ToRole="tbl_solicitudEntrega" />
+        </EntityType>
+        <EntityType Name="tbl_persona">
+          <Key>
+            <PropertyRef Name="Id_Persona" />
+          </Key>
+          <Property Name="Id_Persona" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellido" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="Int32" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="90" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DPI" Type="Int32" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="Tipo_Persona" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbl_envio" Relationship="Self.FK__tbl_envio__Perso__2E1BDC42" FromRole="tbl_persona" ToRole="tbl_envio" />
+          <NavigationProperty Name="tbl_solicitudEntrega" Relationship="Self.FK__tbl_solic__Perso__36B12243" FromRole="tbl_persona" ToRole="tbl_solicitudEntrega" />
+          <NavigationProperty Name="tbl_usuario" Relationship="Self.FK__tbl_usuar__Perso__31EC6D26" FromRole="tbl_persona" ToRole="tbl_usuario" />
+        </EntityType>
+        <EntityType Name="tbl_recibe">
+          <Key>
+            <PropertyRef Name="Id_Recibe" />
+          </Key>
+          <Property Name="Id_Recibe" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="90" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellido" Type="String" MaxLength="90" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_solicitudEntrega" Relationship="Self.FK__tbl_solic__Perso__37A5467C" FromRole="tbl_recibe" ToRole="tbl_solicitudEntrega" />
+        </EntityType>
+        <EntityType Name="tbl_solicitudEntrega">
+          <Key>
+            <PropertyRef Name="Id_Entrega" />
+          </Key>
+          <Property Name="Id_Entrega" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Persona_Envio" Type="Int32" Nullable="false" />
+          <Property Name="Tipo_Paquete" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion_Paquete" Type="String" MaxLength="90" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Peso_Paquete" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Persona_Recibe" Type="Int32" Nullable="false" />
+          <Property Name="Direccion_Entrega" Type="Int32" Nullable="false" />
+          <Property Name="Ubicacion_Entrega" Type="Int32" Nullable="false" />
+          <Property Name="Pago" Type="Decimal" Precision="9" Scale="2" Nullable="false" />
+          <NavigationProperty Name="tbl_direccion" Relationship="Self.FK__tbl_solic__Direc__35BCFE0A" FromRole="tbl_solicitudEntrega" ToRole="tbl_direccion" />
+          <NavigationProperty Name="tbl_envio" Relationship="Self.FK__tbl_solic__Ubica__398D8EEE" FromRole="tbl_solicitudEntrega" ToRole="tbl_envio" />
+          <NavigationProperty Name="tbl_paquete" Relationship="Self.FK__tbl_solic__Tipo___38996AB5" FromRole="tbl_solicitudEntrega" ToRole="tbl_paquete" />
+          <NavigationProperty Name="tbl_persona" Relationship="Self.FK__tbl_solic__Perso__36B12243" FromRole="tbl_solicitudEntrega" ToRole="tbl_persona" />
+          <NavigationProperty Name="tbl_recibe" Relationship="Self.FK__tbl_solic__Perso__37A5467C" FromRole="tbl_solicitudEntrega" ToRole="tbl_recibe" />
+        </EntityType>
+        <EntityType Name="tbl_tipoPersona">
+          <Key>
+            <PropertyRef Name="Id_Tpersona" />
+          </Key>
+          <Property Name="Id_Tpersona" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tipo_Persona" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_usuario" Relationship="Self.FK__tbl_usuar__Tipo___32E0915F" FromRole="tbl_tipoPersona" ToRole="tbl_usuario" />
+        </EntityType>
+        <EntityType Name="tbl_usuario">
+          <Key>
+            <PropertyRef Name="Id_Usuario" />
+          </Key>
+          <Property Name="Id_Usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tipo_Persona" Type="Int32" Nullable="false" />
+          <Property Name="Usuario" Type="String" MaxLength="90" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contrasena" Type="String" MaxLength="90" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Persona" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_persona" Relationship="Self.FK__tbl_usuar__Perso__31EC6D26" FromRole="tbl_usuario" ToRole="tbl_persona" />
+          <NavigationProperty Name="tbl_tipoPersona" Relationship="Self.FK__tbl_usuar__Tipo___32E0915F" FromRole="tbl_usuario" ToRole="tbl_tipoPersona" />
+        </EntityType>
+        <Association Name="FK__tbl_envio__Direc__2F10007B">
+          <End Role="tbl_direccion" Type="Self.tbl_direccion" Multiplicity="1" />
+          <End Role="tbl_envio" Type="Self.tbl_envio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_direccion">
+              <PropertyRef Name="Id_Direccion" />
+            </Principal>
+            <Dependent Role="tbl_envio">
+              <PropertyRef Name="Direccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_solic__Direc__35BCFE0A">
+          <End Role="tbl_direccion" Type="Self.tbl_direccion" Multiplicity="1" />
+          <End Role="tbl_solicitudEntrega" Type="Self.tbl_solicitudEntrega" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_direccion">
+              <PropertyRef Name="Id_Direccion" />
+            </Principal>
+            <Dependent Role="tbl_solicitudEntrega">
+              <PropertyRef Name="Direccion_Entrega" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_envio__Perso__2E1BDC42">
+          <End Role="tbl_persona" Type="Self.tbl_persona" Multiplicity="1" />
+          <End Role="tbl_envio" Type="Self.tbl_envio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_persona">
+              <PropertyRef Name="Id_Persona" />
+            </Principal>
+            <Dependent Role="tbl_envio">
+              <PropertyRef Name="Persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_solic__Ubica__398D8EEE">
+          <End Role="tbl_envio" Type="Self.tbl_envio" Multiplicity="1" />
+          <End Role="tbl_solicitudEntrega" Type="Self.tbl_solicitudEntrega" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_envio">
+              <PropertyRef Name="Id_Envio" />
+            </Principal>
+            <Dependent Role="tbl_solicitudEntrega">
+              <PropertyRef Name="Ubicacion_Entrega" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_solic__Tipo___38996AB5">
+          <End Role="tbl_paquete" Type="Self.tbl_paquete" Multiplicity="1" />
+          <End Role="tbl_solicitudEntrega" Type="Self.tbl_solicitudEntrega" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_paquete">
+              <PropertyRef Name="Id_Paquete" />
+            </Principal>
+            <Dependent Role="tbl_solicitudEntrega">
+              <PropertyRef Name="Tipo_Paquete" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_solic__Perso__36B12243">
+          <End Role="tbl_persona" Type="Self.tbl_persona" Multiplicity="1" />
+          <End Role="tbl_solicitudEntrega" Type="Self.tbl_solicitudEntrega" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_persona">
+              <PropertyRef Name="Id_Persona" />
+            </Principal>
+            <Dependent Role="tbl_solicitudEntrega">
+              <PropertyRef Name="Persona_Envio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_usuar__Perso__31EC6D26">
+          <End Role="tbl_persona" Type="Self.tbl_persona" Multiplicity="1" />
+          <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_persona">
+              <PropertyRef Name="Id_Persona" />
+            </Principal>
+            <Dependent Role="tbl_usuario">
+              <PropertyRef Name="Persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_solic__Perso__37A5467C">
+          <End Role="tbl_recibe" Type="Self.tbl_recibe" Multiplicity="1" />
+          <End Role="tbl_solicitudEntrega" Type="Self.tbl_solicitudEntrega" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_recibe">
+              <PropertyRef Name="Id_Recibe" />
+            </Principal>
+            <Dependent Role="tbl_solicitudEntrega">
+              <PropertyRef Name="Persona_Recibe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_usuar__Tipo___32E0915F">
+          <End Role="tbl_tipoPersona" Type="Self.tbl_tipoPersona" Multiplicity="1" />
+          <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_tipoPersona">
+              <PropertyRef Name="Id_Tpersona" />
+            </Principal>
+            <Dependent Role="tbl_usuario">
+              <PropertyRef Name="Tipo_Persona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EntregaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_direccion" EntityType="Self.tbl_direccion" />
+          <EntitySet Name="tbl_envio" EntityType="Self.tbl_envio" />
+          <EntitySet Name="tbl_paquete" EntityType="Self.tbl_paquete" />
+          <EntitySet Name="tbl_persona" EntityType="Self.tbl_persona" />
+          <EntitySet Name="tbl_recibe" EntityType="Self.tbl_recibe" />
+          <EntitySet Name="tbl_solicitudEntrega" EntityType="Self.tbl_solicitudEntrega" />
+          <EntitySet Name="tbl_tipoPersona" EntityType="Self.tbl_tipoPersona" />
+          <EntitySet Name="tbl_usuario" EntityType="Self.tbl_usuario" />
+          <AssociationSet Name="FK__tbl_envio__Direc__2F10007B" Association="Self.FK__tbl_envio__Direc__2F10007B">
+            <End Role="tbl_direccion" EntitySet="tbl_direccion" />
+            <End Role="tbl_envio" EntitySet="tbl_envio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_solic__Direc__35BCFE0A" Association="Self.FK__tbl_solic__Direc__35BCFE0A">
+            <End Role="tbl_direccion" EntitySet="tbl_direccion" />
+            <End Role="tbl_solicitudEntrega" EntitySet="tbl_solicitudEntrega" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_envio__Perso__2E1BDC42" Association="Self.FK__tbl_envio__Perso__2E1BDC42">
+            <End Role="tbl_persona" EntitySet="tbl_persona" />
+            <End Role="tbl_envio" EntitySet="tbl_envio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_solic__Ubica__398D8EEE" Association="Self.FK__tbl_solic__Ubica__398D8EEE">
+            <End Role="tbl_envio" EntitySet="tbl_envio" />
+            <End Role="tbl_solicitudEntrega" EntitySet="tbl_solicitudEntrega" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_solic__Tipo___38996AB5" Association="Self.FK__tbl_solic__Tipo___38996AB5">
+            <End Role="tbl_paquete" EntitySet="tbl_paquete" />
+            <End Role="tbl_solicitudEntrega" EntitySet="tbl_solicitudEntrega" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_solic__Perso__36B12243" Association="Self.FK__tbl_solic__Perso__36B12243">
+            <End Role="tbl_persona" EntitySet="tbl_persona" />
+            <End Role="tbl_solicitudEntrega" EntitySet="tbl_solicitudEntrega" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_usuar__Perso__31EC6D26" Association="Self.FK__tbl_usuar__Perso__31EC6D26">
+            <End Role="tbl_persona" EntitySet="tbl_persona" />
+            <End Role="tbl_usuario" EntitySet="tbl_usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_solic__Perso__37A5467C" Association="Self.FK__tbl_solic__Perso__37A5467C">
+            <End Role="tbl_recibe" EntitySet="tbl_recibe" />
+            <End Role="tbl_solicitudEntrega" EntitySet="tbl_solicitudEntrega" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_usuar__Tipo___32E0915F" Association="Self.FK__tbl_usuar__Tipo___32E0915F">
+            <End Role="tbl_tipoPersona" EntitySet="tbl_tipoPersona" />
+            <End Role="tbl_usuario" EntitySet="tbl_usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EntregaModelStoreContainer" CdmEntityContainer="EntregaEntities">
+          <EntitySetMapping Name="tbl_direccion">
+            <EntityTypeMapping TypeName="EntregaModel.tbl_direccion">
+              <MappingFragment StoreEntitySet="tbl_direccion">
+                <ScalarProperty Name="Id_Direccion" ColumnName="Id_Direccion" />
+                <ScalarProperty Name="No_Casa" ColumnName="No_Casa" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="Avenida" ColumnName="Avenida" />
+                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_envio">
+            <EntityTypeMapping TypeName="EntregaModel.tbl_envio">
+              <MappingFragment StoreEntitySet="tbl_envio">
+                <ScalarProperty Name="Id_Envio" ColumnName="Id_Envio" />
+                <ScalarProperty Name="Persona" ColumnName="Persona" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="municipio" ColumnName="municipio" />
+                <ScalarProperty Name="departamento" ColumnName="departamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_paquete">
+            <EntityTypeMapping TypeName="EntregaModel.tbl_paquete">
+              <MappingFragment StoreEntitySet="tbl_paquete">
+                <ScalarProperty Name="Id_Paquete" ColumnName="Id_Paquete" />
+                <ScalarProperty Name="Tipo_Paquete" ColumnName="Tipo_Paquete" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_persona">
+            <EntityTypeMapping TypeName="EntregaModel.tbl_persona">
+              <MappingFragment StoreEntitySet="tbl_persona">
+                <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="DPI" ColumnName="DPI" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Tipo_Persona" ColumnName="Tipo_Persona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_recibe">
+            <EntityTypeMapping TypeName="EntregaModel.tbl_recibe">
+              <MappingFragment StoreEntitySet="tbl_recibe">
+                <ScalarProperty Name="Id_Recibe" ColumnName="Id_Recibe" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_solicitudEntrega">
+            <EntityTypeMapping TypeName="EntregaModel.tbl_solicitudEntrega">
+              <MappingFragment StoreEntitySet="tbl_solicitudEntrega">
+                <ScalarProperty Name="Id_Entrega" ColumnName="Id_Entrega" />
+                <ScalarProperty Name="Persona_Envio" ColumnName="Persona_Envio" />
+                <ScalarProperty Name="Tipo_Paquete" ColumnName="Tipo_Paquete" />
+                <ScalarProperty Name="Descripcion_Paquete" ColumnName="Descripcion_Paquete" />
+                <ScalarProperty Name="Peso_Paquete" ColumnName="Peso_Paquete" />
+                <ScalarProperty Name="Persona_Recibe" ColumnName="Persona_Recibe" />
+                <ScalarProperty Name="Direccion_Entrega" ColumnName="Direccion_Entrega" />
+                <ScalarProperty Name="Ubicacion_Entrega" ColumnName="Ubicacion_Entrega" />
+                <ScalarProperty Name="Pago" ColumnName="Pago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_tipoPersona">
+            <EntityTypeMapping TypeName="EntregaModel.tbl_tipoPersona">
+              <MappingFragment StoreEntitySet="tbl_tipoPersona">
+                <ScalarProperty Name="Id_Tpersona" ColumnName="Id_Tpersona" />
+                <ScalarProperty Name="Tipo_Persona" ColumnName="Tipo_Persona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_usuario">
+            <EntityTypeMapping TypeName="EntregaModel.tbl_usuario">
+              <MappingFragment StoreEntitySet="tbl_usuario">
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Tipo_Persona" ColumnName="Tipo_Persona" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="Persona" ColumnName="Persona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

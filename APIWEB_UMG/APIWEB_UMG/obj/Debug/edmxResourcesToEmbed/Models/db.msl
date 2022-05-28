@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EntregaModelStoreContainer" CdmEntityContainer="EntregaEntities">
+    <EntitySetMapping Name="tbl_direccion">
+      <EntityTypeMapping TypeName="EntregaModel.tbl_direccion">
+        <MappingFragment StoreEntitySet="tbl_direccion">
+          <ScalarProperty Name="Id_Direccion" ColumnName="Id_Direccion" />
+          <ScalarProperty Name="No_Casa" ColumnName="No_Casa" />
+          <ScalarProperty Name="Calle" ColumnName="Calle" />
+          <ScalarProperty Name="Avenida" ColumnName="Avenida" />
+          <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+          <ScalarProperty Name="Municipio" ColumnName="Municipio" />
+          <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+          <ScalarProperty Name="Pais" ColumnName="Pais" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_envio">
+      <EntityTypeMapping TypeName="EntregaModel.tbl_envio">
+        <MappingFragment StoreEntitySet="tbl_envio">
+          <ScalarProperty Name="Id_Envio" ColumnName="Id_Envio" />
+          <ScalarProperty Name="Persona" ColumnName="Persona" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="municipio" ColumnName="municipio" />
+          <ScalarProperty Name="departamento" ColumnName="departamento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_paquete">
+      <EntityTypeMapping TypeName="EntregaModel.tbl_paquete">
+        <MappingFragment StoreEntitySet="tbl_paquete">
+          <ScalarProperty Name="Id_Paquete" ColumnName="Id_Paquete" />
+          <ScalarProperty Name="Tipo_Paquete" ColumnName="Tipo_Paquete" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_persona">
+      <EntityTypeMapping TypeName="EntregaModel.tbl_persona">
+        <MappingFragment StoreEntitySet="tbl_persona">
+          <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="DPI" ColumnName="DPI" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Tipo_Persona" ColumnName="Tipo_Persona" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_recibe">
+      <EntityTypeMapping TypeName="EntregaModel.tbl_recibe">
+        <MappingFragment StoreEntitySet="tbl_recibe">
+          <ScalarProperty Name="Id_Recibe" ColumnName="Id_Recibe" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_solicitudEntrega">
+      <EntityTypeMapping TypeName="EntregaModel.tbl_solicitudEntrega">
+        <MappingFragment StoreEntitySet="tbl_solicitudEntrega">
+          <ScalarProperty Name="Id_Entrega" ColumnName="Id_Entrega" />
+          <ScalarProperty Name="Persona_Envio" ColumnName="Persona_Envio" />
+          <ScalarProperty Name="Tipo_Paquete" ColumnName="Tipo_Paquete" />
+          <ScalarProperty Name="Descripcion_Paquete" ColumnName="Descripcion_Paquete" />
+          <ScalarProperty Name="Peso_Paquete" ColumnName="Peso_Paquete" />
+          <ScalarProperty Name="Persona_Recibe" ColumnName="Persona_Recibe" />
+          <ScalarProperty Name="Direccion_Entrega" ColumnName="Direccion_Entrega" />
+          <ScalarProperty Name="Ubicacion_Entrega" ColumnName="Ubicacion_Entrega" />
+          <ScalarProperty Name="Pago" ColumnName="Pago" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_tipoPersona">
+      <EntityTypeMapping TypeName="EntregaModel.tbl_tipoPersona">
+        <MappingFragment StoreEntitySet="tbl_tipoPersona">
+          <ScalarProperty Name="Id_Tpersona" ColumnName="Id_Tpersona" />
+          <ScalarProperty Name="Tipo_Persona" ColumnName="Tipo_Persona" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_usuario">
+      <EntityTypeMapping TypeName="EntregaModel.tbl_usuario">
+        <MappingFragment StoreEntitySet="tbl_usuario">
+          <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+          <ScalarProperty Name="Tipo_Persona" ColumnName="Tipo_Persona" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+          <ScalarProperty Name="Persona" ColumnName="Persona" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

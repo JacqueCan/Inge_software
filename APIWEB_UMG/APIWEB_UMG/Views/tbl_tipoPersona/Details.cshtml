@@ -1,0 +1,26 @@
+﻿@model APIWEB_UMG.Models.tbl_tipoPersona
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tbl_tipoPersona</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipo_Persona)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipo_Persona)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_Tpersona }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
